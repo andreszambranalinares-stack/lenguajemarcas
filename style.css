@@ -1,0 +1,150 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Fira+Code:wght@400;600&display=swap');
+
+body {
+    background: linear-gradient(135deg, #0f172a, #1e1b4b, #312e81);
+    font-family: 'Inter', sans-serif;
+    color: #e2e8f0;
+    overflow-x: hidden;
+    /* Previene rebote en iOS */
+    overscroll-behavior-y: none;
+}
+
+/* EFECTO CRISTAL */
+.glass-panel {
+    background: rgba(15, 23, 42, 0.75);
+    /* Un poco más oscuro para legibilidad móvil */
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+    transform: translateZ(0);
+}
+
+/* BOTONES DE NAVEGACIÓN */
+.nav-btn {
+    padding: 0.5rem 0.8rem;
+    border-radius: 0.5rem;
+    border: 1px solid transparent;
+    transition: background-color 0.2s;
+    flex-shrink: 0;
+    /* Vital para scroll horizontal */
+}
+
+.nav-btn:hover,
+.nav-btn:active {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+/* INPUTS DE CÓDIGO (Responsive) */
+.inline-input {
+    background: rgba(0, 0, 0, 0.3);
+    border: 0;
+    border-bottom: 2px solid #64748b;
+    color: #38bdf8;
+    font-family: 'Fira Code', monospace;
+    font-size: inherit;
+    text-align: center;
+    padding: 0 0.2rem;
+    margin: 0 0.1rem;
+    outline: none;
+    border-radius: 4px;
+    min-width: 40px;
+    /* Reducido para móvil */
+    max-width: 120px;
+}
+
+/* Inputs específicos del DOJO que necesitan ser más anchos */
+.code-input {
+    text-align: left;
+    min-width: 80px;
+}
+
+.inline-input:focus {
+    border-bottom-color: #38bdf8;
+    background: rgba(56, 189, 248, 0.1);
+}
+
+.inline-input.correct {
+    border-color: #22c55e !important;
+    color: #22c55e !important;
+    background: rgba(34, 197, 94, 0.1) !important;
+}
+
+.inline-input.incorrect {
+    border-color: #ef4444 !important;
+    color: #ef4444 !important;
+    background: rgba(239, 68, 68, 0.1) !important;
+}
+
+.exam-btn-correct {
+    background-color: #166534 !important;
+    /* Verde más oscuro */
+    border-color: #22c55e !important;
+    color: white !important;
+}
+
+.exam-btn-incorrect {
+    background-color: #991b1b !important;
+    /* Rojo más oscuro */
+    border-color: #ef4444 !important;
+    color: white !important;
+}
+
+.code-font {
+    font-family: 'Fira Code', monospace;
+}
+
+/* UTILITIES */
+.section-title {
+    font-weight: 700;
+    margin-bottom: 1rem;
+    padding-left: 0.8rem;
+    border-left-width: 4px;
+}
+
+/* Ocultar Scrollbar en Navegación pero permitir scroll */
+.no-scrollbar::-webkit-scrollbar {
+    display: none;
+}
+
+.no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
+
+/* Máscara de desvanecimiento para el menú lateral */
+.mask-gradient {
+    mask-image: linear-gradient(to right, black 85%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, black 85%, transparent 100%);
+}
+
+.fade-in {
+    animation: fadeIn 0.3s ease-out forwards;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Ajustes específicos para pantallas pequeñas */
+@media (max-width: 640px) {
+    .exam-card {
+        padding: 1rem;
+    }
+
+    .inline-input {
+        font-size: 0.9rem;
+    }
+
+    code {
+        font-size: 0.85em;
+    }
+}
