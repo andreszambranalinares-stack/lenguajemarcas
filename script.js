@@ -16,22 +16,50 @@ const app = {
     },
 
     // --- FULLSCREEN LOGIC ---
+    // --- FULLSCREEN LOGIC (CORREGIDO) ---
     toggleFullScreen() {
         const doc = window.document;
+        // Intentamos coger el elemento body o html, body suele ser más seguro en móviles
         const docEl = doc.documentElement;
         const btnIcon = document.getElementById('icon-fullscreen');
 
-        const requestFullScreen = docEl.requestFullscreen || docEl.mozRequestFullScreen || docEl.webkitRequestFullScreen || docEl.msRequestFullscreen;
-        const cancelFullScreen = doc.exitFullscreen || doc.mozCancelFullScreen || doc.webkitExitFullscreen || doc.msExitFullscreen;
+        // Detectar si ya estamos en pantalla completa
+        const isFullScreen = doc.fullscreenElement || doc.mozFullScreenElement || doc.webkitFullscreenElement || doc.msFullscreenElement;
 
-        if (!doc.fullscreenElement && !doc.mozFullScreenElement && !doc.webkitFullscreenElement && !doc.msFullscreenElement) {
-            requestFullScreen.call(docEl);
-            btnIcon.classList.remove('fa-expand');
-            btnIcon.classList.add('fa-compress');
+        if (!isFullScreen) {
+            // Entrar en pantalla completa
+            if (docEl.requestFullscreen) {
+                docEl.requestFullscreen();
+            } else if (docEl.mozRequestFullScreen) { /* Firefox */
+                docEl.mozRequestFullScreen();
+            } else if (docEl.webkitRequestFullScreen) { /* Chrome, Safari & Opera */
+                docEl.webkitRequestFullScreen();
+            } else if (docEl.msRequestFullscreen) { /* IE/Edge */
+                docEl.msRequestFullscreen();
+            }
+
+            // Cambiar icono
+            if (btnIcon) {
+                btnIcon.classList.remove('fa-expand');
+                btnIcon.classList.add('fa-compress');
+            }
         } else {
-            cancelFullScreen.call(doc);
-            btnIcon.classList.remove('fa-compress');
-            btnIcon.classList.add('fa-expand');
+            // Salir de pantalla completa
+            if (doc.exitFullscreen) {
+                doc.exitFullscreen();
+            } else if (doc.mozCancelFullScreen) {
+                doc.mozCancelFullScreen();
+            } else if (doc.webkitExitFullscreen) {
+                doc.webkitExitFullscreen();
+            } else if (doc.msExitFullscreen) {
+                doc.msExitFullscreen();
+            }
+
+            // Cambiar icono
+            if (btnIcon) {
+                btnIcon.classList.remove('fa-compress');
+                btnIcon.classList.add('fa-expand');
+            }
         }
     },
 
